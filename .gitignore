@@ -128,3 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 .idea
+.Rproj.user
+.DS_Store
+*.Rproj
+.Rhistory
+.vscode
