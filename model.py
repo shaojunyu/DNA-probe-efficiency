@@ -1,24 +1,18 @@
 import math
-from utils import *
-import pandas
 import torch
 import torch.nn as nn
-from torch.utils.data import Dataset
 import torch.nn.functional as F
+from torch.utils.data import Dataset
+from utils import *
 
 
 class ProbeDataset(Dataset):
     """DNA Probe dataset"""
 
-    def __init__(self, args, subset=None):
+    def __init__(self, args, dataframe):
         self.args = args
-        self.subset = subset
         self.kmer_dict = build_kmers_dict(args.kmer)
-        self.dataframe = pandas.read_csv(args.input, sep="\t", header=None)
-        if subset:
-            self.dataframe = self.dataframe.iloc[subset,]
-        self.dataframe = self.dataframe.apply(lambda x: x.to_list(),
-                                              axis=1).values
+        self.dataframe = dataframe.apply(lambda x: x.to_list(), axis=1).values
 
     def kmer_encoding(self, seq):
         return [self.kmer_dict[kmer] for kmer in
@@ -28,15 +22,23 @@ class ProbeDataset(Dataset):
         return len(self.dataframe)
 
     def __getitem__(self, idx):
-        if self.args.use_struc:
-            seq, struc, target = self.dataframe[idx]
+        if self.args.use_struct:
+            seq, struct, target = self.dataframe[idx]
+            struct = torch.tensor([struct_dict[c] for c in struct])
         else:
             seq, target = self.dataframe[idx]
 
+        seq = torch.tensor(self.kmer_encoding(seq))
+        target = torch.tensor(target, dtype=torch.float32)
+
         if self.args.onehot:
-            seq = torch.tensor(self.kmer_encoding(seq))
-            target = torch.tensor(target, dtype=torch.float32)
-            return F.one_hot(seq, num_classes=4).to(torch.float32), target
+            if self.args.use_struct:
+                return torch.cat((F.one_hot(seq, 4), F.one_hot(struct, 3)),
+                                 1).to(torch.float32), target
+            else:
+                return F.one_hot(seq, 4).to(torch.float32), target
+        else:
+            return seq, target
 
 
 class PositionalEncoding(nn.Module):
@@ -68,7 +70,7 @@ class AttentionLSTM(nn.Module):
         if args.onehot:
             self.embed = None
             self.embed_dim = 4
-            if args.use_struc:
+            if args.use_struct:
                 self.embed_dim = 7
         else:
             self.embed = nn.Embedding(num_embeddings=len(args.kmers_dict),
@@ -94,19 +96,14 @@ class AttentionLSTM(nn.Module):
 
         self.conv1 = nn.Sequential(
             nn.Conv1d(in_channels=128, out_channels=32, kernel_size=5),
-            nn.ReLU(),
-            nn.LayerNorm([32, args.seq_len - 4]),
+            nn.ReLU(), nn.LayerNorm([32, args.seq_len - 4]),
             nn.Dropout(args.dropout))
 
         self.fc_out = nn.Sequential(
             nn.Linear(in_features=32 * (args.seq_len - 4), out_features=128),
-            nn.ReLU(),
-            nn.LayerNorm(128),
-            nn.Dropout(args.dropout),
-            nn.Linear(in_features=128, out_features=128),
-            nn.ReLU(),
-            nn.LayerNorm(128),
-            nn.Dropout(args.dropout),
+            nn.ReLU(), nn.LayerNorm(128), nn.Dropout(args.dropout),
+            nn.Linear(in_features=128, out_features=128), nn.ReLU(),
+            nn.LayerNorm(128), nn.Dropout(args.dropout),
             nn.Linear(in_features=128, out_features=1))
 
     def forward(self, x):

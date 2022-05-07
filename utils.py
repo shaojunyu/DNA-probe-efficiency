@@ -19,3 +19,10 @@ def build_kmers_dict(k):
     bases = ['A', 'C', 'G', 'T']
     kmers = [''.join(p) for p in itertools.product(bases, repeat=k)]
     return {str(v): i for i, v in enumerate(kmers)}
+
+
+struct_dict = {'.': 0, '(': 1, ')': 2}
+
+
+def struct_encoding(struct):
+    return [struct_dict[c] for c in struct]
