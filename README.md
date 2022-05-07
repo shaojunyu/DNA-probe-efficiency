@@ -2,7 +2,7 @@
 
 <!-- PROJECT LOGO -->
 <br />
-<div style="text-align: center">
+<div align="center">
   <a href="https://github.com/shaojunyu/DNA-probe-efficiency">
     <img src="images/DNA.png" alt="Logo" width="80" height="80">
   </a>
