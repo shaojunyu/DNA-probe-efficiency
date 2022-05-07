@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/shaojunyu/DNA-probe-efficiency">
-    <img src="images/DNA.png" alt="Logo" width="80" height="80">
+    <img src="images/DNA.png" alt="Logo" width="100" height="100">
   </a>
 
 <h3 align="center">DNA Probe Targeting Efficiency</h3>
@@ -107,7 +107,7 @@ work well in this space. You may also link to more resources.
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
-<p style="text-align: right">(<a href="#top">back to top</a>)</p>
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
@@ -129,7 +129,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 Distributed under the BSD License. See `LICENSE` for more information.
 
-<p style="text-align: right">(<a href="#top">back to top</a>)</p>
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
@@ -141,7 +141,7 @@ Shaojun Yu - shaojun.yu@emory.edu
 Zhuqing Zheng - zzq1207@126.com   
 Project Link: [https://github.com/shaojunyu/DNA-probe-efficiency](https://github.com/shaojunyu/DNA-probe-efficiency)
 
-<p style="text-align: right">(<a href="#top">back to top</a>)</p>
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
@@ -156,7 +156,7 @@ Project Link: [https://github.com/shaojunyu/DNA-probe-efficiency](https://github
 * Huang, L. et al. (2019) ‘LinearFold: linear-time approximate RNA folding by 5’-to-3’ dynamic programming and beam search’, Bioinformatics, 35(14), pp. i295–i304. doi:10.1093/bioinformatics/btz375.
 * Sato, K., Akiyama, M. and Sakakibara, Y. (2021) ‘RNA secondary structure prediction using deep learning with thermodynamic integration’, Nature Communications, 12(1), p. 941. doi:10.1038/s41467-021-21194-4.
 
-<p style="text-align: right">(<a href="#top">back to top</a>)</p>
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
