@@ -100,9 +100,9 @@ def load_data(args):
 
     if args.subcommand == 'train':
         if args.use_struct:
-            assert dataset.shape[1] == 3
+            assert dataset.shape[1] >= 3
         else:
-            assert dataset.shape[1] == 2
+            assert dataset.shape[1] >= 2
         print("Dataset size: {}, use 10% of data as "
               "validation set".format(dataset.shape))
         # split data
@@ -119,9 +119,11 @@ def load_data(args):
         return [_train_loader, _val_loader]
     else:
         if args.use_struct:
-            assert dataset.shape[1] == 2
+            assert dataset.shape[1] >= 2
+            dataset = dataset.iloc[:, 0:2]
         else:
-            assert dataset.shape[1] == 1
+            assert dataset.shape[1] >= 1
+            dataset = dataset.iloc[:, 0:1]
         # append a placeholder column
         dataset['target'] = 0
         return DataLoader(ProbeDataset(args, dataset),
@@ -218,5 +220,7 @@ if __name__ == '__main__':
     if args.subcommand == 'train':
         print('training config:', args.__dict__)
         train(args)
-    else:
+    elif args.subcommand == 'predict':
         predict(args)
+    else:
+        print('please specify the subcommand, train or predict')
