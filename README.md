@@ -12,8 +12,6 @@
   <p style="text-align: center">
     A deep learning tool for predicting DNA probe on-target efficiency in targeting sequencing
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
-    <br />
     <br />
   </p>
 </div>
@@ -60,7 +58,7 @@ On-target efficiency of DNA probes based on their sequence. We provide some samp
 
 
 
-<p style="text-align: right">(<a href="#top">back to top</a>)</p>
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
