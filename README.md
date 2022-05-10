@@ -37,7 +37,7 @@
       <ul>
         <li><a href="#train">Train</a></li>
         <li><a href="#predict">Predict</a></li>
-        <li><a href="#dataformat">Data format</a></li>
+        <li><a href="#data format">Data format</a></li>
       </ul>
     </li>
     <li><a href="#roadmap">Roadmap</a></li>
@@ -111,7 +111,7 @@ $ python3 DNA_Probe.py train \
 -output models/pig_150bp_model.h5
 ```
 
-1. Train a new model that include the strtture information and set the learning rate as 2e-5. The model will use sequence features as well as the corresponding strucuture information of the sequence.
+2. Train a new model that include the strtture information and set the learning rate as 2e-5. The model will use sequence features as well as the corresponding strucuture information of the sequence.
 ```
 python DNA_Probe.py train \  
 -input data/human_probe_effiency_120bp_with_struc_train.tsv.gz \ 
@@ -130,26 +130,26 @@ python DNA_Probe.py train \
 -gpu 0
 ```
 
-Supportted arguments:
-* input : str, required  
+***Supportted arguments:***
+* ***input : str, required***  
   The file path of the input data.
-* output : str, required   
+* ***output : str, required***   
   The file path of the output model.
-* gpu : int, optional   
+* ***gpu : int, optional***   
   The GPU device ID that used to accelerate the process. Leave it empty to use CPU if GPU is not avaliable. Default: None.
-* kmer : int, optional    
+* ***kmer : int, optional***    
   The kmer leagth of DNA seq. The defult value is 1, which is the onehot encoding of DNA. Any value larger than 1 will encode the DNA sequnce based on the kmer first. Please note that if you set the `use_struct` option Ture, this option will have not effect.
-* onehot : bool, optional
+* ***onehot : bool, optional***  
   If [default: True], use onehot encodding for DNA seq and structure seq. If None, will leave only if position is 0. Please note that this argument will overide the setting in `kmer` and 
-* use_struct : : bool, optional  
+* ***use_struct : : bool, optional***  
   If true, encorapte the structure information in the model. Default: False.
-* embed_dim : int, optional  
+* ***embed_dim : int, optional***  
   Set the embeding dimention [default: 32] for input sequences.
-* epochs : int, optional  
+* ***epochs : int, optional***  
   Set the epoches [default: 60] for model training. De
-* batch_size: int, optional  
+* ***batch_size: int, optional***  
   Set the batch size [default: 64] for model training.
-* lr : float, optional  
+* ***lr : float, optional***  
   Set the learning rate [defalt: 1e-4] for model traning.
   
 
