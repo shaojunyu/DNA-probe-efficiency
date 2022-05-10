@@ -66,7 +66,7 @@ On-target efficiency of DNA probes based on their sequence. We provide some samp
 <!-- GETTING STARTED -->
 
 ## Getting Started
-This tool is developed in Python, so you need to set up a proper python environment to run the code.
+This tool is developed in Python, so you need to set up a proper Python environment to run the code.
 
 ### Prerequisites
 
@@ -105,30 +105,30 @@ Here are some simple and useful examples of how to use this tools. For more opti
 * ### Train
   
 1. Train a new model with the input data and save the model to output. The model will only use the sequence features.
-```sh
-$ python3 DNA_Probe.py train \  
--input data/pig_probe_effiency_150bp_train.tsv.gz \  
--output models/pig_150bp_model.h5
-```
+    ```sh
+    $ python3 DNA_Probe.py train \  
+    -input data/pig_probe_effiency_150bp_train.tsv.gz \  
+    -output models/pig_150bp_model.h5
+    ```
 
 2. Train a new model that include the strtture information and set the learning rate as 2e-5. The model will use sequence features as well as the corresponding strucuture information of the sequence.
-```
-python DNA_Probe.py train \  
--input data/human_probe_effiency_120bp_with_struc_train.tsv.gz \ 
--use_struct \  
--output models/human_120bp_struct.h5 \  
--lr 2e-5
-```
+    ```
+    python DNA_Probe.py train \  
+    -input data/human_probe_effiency_120bp_with_struc_train.tsv.gz \ 
+    -use_struct \  
+    -output models/human_120bp_struct.h5 \  
+    -lr 2e-5
+    ```
 
 3. Use GPU to accelerate the training process.
-```
-python DNA_Probe.py train \  
--input data/human_probe_effiency_120bp_with_struc_train.tsv.gz \ 
--use_struct \  
--output models/human_120bp_struct.h5 \  
--lr 2e-5 \  
--gpu 0
-```
+    ```
+    python DNA_Probe.py train \  
+    -input data/human_probe_effiency_120bp_with_struc_train.tsv.gz \ 
+    -use_struct \  
+    -output models/human_120bp_struct.h5 \  
+    -lr 2e-5 \  
+    -gpu 0
+    ```
 
 ***Supportted arguments:***
 * ***input : str, required***  
