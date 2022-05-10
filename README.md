@@ -106,7 +106,7 @@ Here are some simple and useful examples of how to use this tools. For more opti
   
 1. Train a new model with the input data and save the model to output. The model will only use the sequence features.
     ```sh
-    $ python3 DNA_Probe.py train \  
+    python3 DNA_Probe.py train \  
     -input data/pig_probe_effiency_150bp_train.tsv.gz \  
     -output models/pig_150bp_model.h5
     ```
@@ -140,9 +140,9 @@ Here are some simple and useful examples of how to use this tools. For more opti
 * ***kmer : int, optional***    
   The kmer leagth of DNA seq. The defult value is 1, which is the onehot encoding of DNA. Any value larger than 1 will encode the DNA sequnce based on the kmer first. Please note that if you set the `use_struct` option Ture, this option will have not effect.
 * ***onehot : bool, optional***  
-  If [default: True], use onehot encodding for DNA seq and structure seq. If None, will leave only if position is 0. Please note that this argument will overide the setting in `kmer` and 
+  If [default: True], use onehot encodding for DNA seq and structure seq. If None, will leave only if position is 0. Please note that this argument will overide the setting in `kmer`.
 * ***use_struct : : bool, optional***  
-  If true, encorapte the structure information in the model. Default: False.
+  If true, encorapte the structure information in the model and only onehot encoding is available. Default: False.
 * ***embed_dim : int, optional***  
   Set the embeding dimention [default: 32] for input sequences.
 * ***epochs : int, optional***  
@@ -154,6 +154,22 @@ Here are some simple and useful examples of how to use this tools. For more opti
   
 
 * ### Predict
+  1. Predict efficiency on new data and save the result to a file.
+      ```
+      python DNA_Probe.py predict \  
+      -input data/human_probe_effiency_120bp_with_struc_test.tsv.gz \  
+      -model models/human_120bp_struct.h5_bk \  
+      -output prediction.txt
+      ```
+  2. Use GPU to accelarate the prediction.
+      ```
+      python DNA_Probe.py predict \  
+      -input data/human_probe_effiency_120bp_with_struc_test.tsv.gz \  
+      -model models/human_120bp_struct.h5_bk \  
+      -output prediction.txt
+      -gpu 0
+      ```
+
 * ### Data Format
 
 <p align="right">(<a href="#top">back to top</a>)</p>
