@@ -80,8 +80,14 @@ $ conda activate probe
 
 Install the dependencies:
 ```sh
-(probe) $ conda install pytorch -c pytorch
 (probe) $ conda install pandas scipy numpy tqdm scikit-learn -c conda-forge
+```
+> if you want   
+
+
+Install Pytorch
+```sh
+(probe) $ conda install pytorch -c pytorch
 ```
 
 ### Installation
@@ -102,58 +108,59 @@ Install the dependencies:
 
 Here are some simple and useful examples of how to use this tools. For more options, please refer to the supported arguments. The main program contains two subcommands: `train` and `predict`. In the Train mode, you can train new models with the new dataset, and in the Predict mode, you can predict the efficiency of pre-trained models.
 
-* ### Train
+### - Train
+  1. Train a new model with the input data and save the model to output. The model will only use the sequence features.
+      ```sh
+      python3 DNA_Probe.py train \  
+      -input data/pig_probe_effiency_150bp_train.tsv.gz \  
+      -output models/pig_150bp_model.h5
+      ```
+
+  2. Train a new model that include the strtture information and set the learning rate as 2e-5. The model will use sequence features as well as the corresponding strucuture information of the sequence.
+      ```
+      python DNA_Probe.py train \  
+      -input data/human_probe_effiency_120bp_with_struc_train.tsv.gz \ 
+      -use_struct \  
+      -output models/human_120bp_struct.h5 \  
+      -lr 2e-5
+      ```
+
+  3. Use GPU to accelerate the training process.
+      ```
+      python DNA_Probe.py train \  
+      -input data/human_probe_effiency_120bp_with_struc_train.tsv.gz \ 
+      -use_struct \  
+      -output models/human_120bp_struct.h5 \  
+      -lr 2e-5 \  
+      -gpu 0
+      ```
+
+  ***Supportted arguments:***
+  * ***input : str, required***  
+    The file path of the input data.
+  * ***output : str, required***   
+    The file path of the output model.
+  * ***gpu : int, optional***   
+    The GPU device ID that used to accelerate the process. Leave it empty to use CPU if GPU is not avaliable. Default: None.
+  * ***kmer : int, optional***    
+    The kmer leagth of DNA seq. The defult value is 1, which is the onehot encoding of DNA. Any value larger than 1 will encode the DNA sequnce based on the kmer first. Please note that if you set the `use_struct` option Ture, this option will have not effect.
+  * ***onehot : bool, optional***  
+    If [default: True], use onehot encodding for DNA seq and structure seq. If None, will leave only if position is 0. Please note that this argument will overide the setting in `kmer`.
+  * ***use_struct : : bool, optional***  
+    If true, encorapte the structure information in the model and only onehot encoding is available. Default: False.
+  * ***embed_dim : int, optional***  
+    Set the embeding dimention [default: 32] for input sequences.
+  * ***epochs : int, optional***  
+    Set the epoches [default: 60] for model training. De
+  * ***batch_size: int, optional***  
+    Set the batch size [default: 64] for model training.
+  * ***lr : float, optional***  
+    Set the learning rate [defalt: 1e-4] for model traning.   
+
   
-1. Train a new model with the input data and save the model to output. The model will only use the sequence features.
-    ```sh
-    python3 DNA_Probe.py train \  
-    -input data/pig_probe_effiency_150bp_train.tsv.gz \  
-    -output models/pig_150bp_model.h5
-    ```
+</br>  
 
-2. Train a new model that include the strtture information and set the learning rate as 2e-5. The model will use sequence features as well as the corresponding strucuture information of the sequence.
-    ```
-    python DNA_Probe.py train \  
-    -input data/human_probe_effiency_120bp_with_struc_train.tsv.gz \ 
-    -use_struct \  
-    -output models/human_120bp_struct.h5 \  
-    -lr 2e-5
-    ```
-
-3. Use GPU to accelerate the training process.
-    ```
-    python DNA_Probe.py train \  
-    -input data/human_probe_effiency_120bp_with_struc_train.tsv.gz \ 
-    -use_struct \  
-    -output models/human_120bp_struct.h5 \  
-    -lr 2e-5 \  
-    -gpu 0
-    ```
-
-***Supportted arguments:***
-* ***input : str, required***  
-  The file path of the input data.
-* ***output : str, required***   
-  The file path of the output model.
-* ***gpu : int, optional***   
-  The GPU device ID that used to accelerate the process. Leave it empty to use CPU if GPU is not avaliable. Default: None.
-* ***kmer : int, optional***    
-  The kmer leagth of DNA seq. The defult value is 1, which is the onehot encoding of DNA. Any value larger than 1 will encode the DNA sequnce based on the kmer first. Please note that if you set the `use_struct` option Ture, this option will have not effect.
-* ***onehot : bool, optional***  
-  If [default: True], use onehot encodding for DNA seq and structure seq. If None, will leave only if position is 0. Please note that this argument will overide the setting in `kmer`.
-* ***use_struct : : bool, optional***  
-  If true, encorapte the structure information in the model and only onehot encoding is available. Default: False.
-* ***embed_dim : int, optional***  
-  Set the embeding dimention [default: 32] for input sequences.
-* ***epochs : int, optional***  
-  Set the epoches [default: 60] for model training. De
-* ***batch_size: int, optional***  
-  Set the batch size [default: 64] for model training.
-* ***lr : float, optional***  
-  Set the learning rate [defalt: 1e-4] for model traning.
-  
-
-* ### Predict
+### - Predict
   1. Predict efficiency on new data and save the result to a file.
       ```
       python DNA_Probe.py predict \  
@@ -170,7 +177,7 @@ Here are some simple and useful examples of how to use this tools. For more opti
       -gpu 0
       ```
 
-* ### Data Format
+### - Data Format
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
