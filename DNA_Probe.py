@@ -1,5 +1,4 @@
 import argparse
-import logging
 import time
 import numpy
 import torch
@@ -64,9 +63,8 @@ def parse_args():
         if torch.cuda.is_available():
             _args.device = torch.device('cuda:' + _args.gpu)
         else:
-            logging.warning('GPU {} is NOT available, '
-                            'use GPU instead!'.format(_args.gpu))
-            _args.device = torch.device('cpu')
+            print('GPU {} is NOT available!'.format(_args.gpu))
+            exit(1)
     else:
         _args.device = torch.device('cpu')
 
