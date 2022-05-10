@@ -58,11 +58,6 @@ A deep learning tool to build models for predicting
 On-target efficiency of DNA probes based on their sequence. We provide some sample data and pre-trained models for testing and evaluation. Use this tool with your dataset to train customized models or just predict new datasets with pre-trained models. It can also be easily modified and applied to other sequence regression problems.
 
 
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
 <!-- GETTING STARTED -->
 
 ## Getting Started
@@ -81,20 +76,16 @@ $ conda activate probe
 Install the dependencies:
 ```sh
 (probe) $ conda install pandas scipy numpy tqdm scikit-learn -c conda-forge
-```
-> if you want   
-
-
-Install Pytorch
-```sh
 (probe) $ conda install pytorch -c pytorch
 ```
+
+>If you want to use GPU to accelarate this tool, please make sure you have installed the proper GPU CUDA driver. Follow the [instructions](https://pytorch.org/get-started/locally/) from PyTorch.
 
 ### Installation
 
 * Download the latest release of this tool from the [release page](https://github.com/shaojunyu/DNA-probe-efficiency/releases), unzip it then you can use the tool.
 ```sh
-(probe) $ python DNA_Probe.py -h
+(probe) $ python3 DNA_Probe.py -h
 ```
 
 
@@ -128,14 +119,14 @@ Here are some simple and useful examples of how to use this tools. For more opti
   3. Use GPU to accelerate the training process.
       ```
       python DNA_Probe.py train \  
-      -input data/human_probe_effiency_120bp_with_struc_train.tsv.gz \ 
+      -input data/human_probe_effiency_120bp_with_struc_train.tsv.gz \  
       -use_struct \  
       -output models/human_120bp_struct.h5 \  
       -lr 2e-5 \  
       -gpu 0
       ```
 
-  ***Supportted arguments:***
+  ***Supportted arguments of train:***
   * ***input : str, required***  
     The file path of the input data.
   * ***output : str, required***   
@@ -176,6 +167,17 @@ Here are some simple and useful examples of how to use this tools. For more opti
       -output prediction.txt
       -gpu 0
       ```
+  ***Supportted arguments of predict:***
+  * ***input : str, required***  
+    The file path of the input data.
+  * ***output : str, required***  
+    The file path of the prediction output.
+  * ***model : str, required***  
+    The file path of the pre-trained model.
+  * ***gpu : int, optional***  
+    The GPU device ID that used to accelerate the process. Leave it empty to use CPU if GPU is not avaliable. Default: None.
+  * ***batch_size : int, optional***  
+    Set the batch size [default: 128] for prediction.
 
 ### - Data Format
 
@@ -196,7 +198,6 @@ Here are some simple and useful examples of how to use this tools. For more opti
 
 
 <!-- LICENSE -->
-
 ## License
 
 Distributed under the BSD License. See `LICENSE` for more information.

@@ -55,7 +55,7 @@ def parse_args():
     predict_parser.add_argument('-gpu', type=str, default='',
                                 help='gpu id to use, leave it empty to use CPU')
     predict_parser.add_argument('-batch_size', help='prediction batch size',
-                                type=int, default=256)
+                                type=int, default=128)
 
     _args = parser.parse_args()
 
