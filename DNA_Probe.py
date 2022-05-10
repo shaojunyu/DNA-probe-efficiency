@@ -2,7 +2,6 @@ import argparse
 import logging
 import time
 import numpy
-import scipy
 import torch
 import pandas
 from utils import *

@@ -66,17 +66,23 @@ On-target efficiency of DNA probes based on their sequence. We provide some samp
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+You can 
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+The recommended way to run this code is to create a conda environment and install all the dependencies inside that environment.
 
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+
+```sh
+$ conda create -n probe python=3.7
+$ conda activate probe
+```
+
+install the dependencies:
+```sh
+(probe) $ conda install pytorch -c pytorch
+(probe) $ conda install pandas scipy numpy tqdm scikit-learn -c conda-forge
+```
 
 ### Installation
 
@@ -106,6 +112,34 @@ Use this space to show useful examples of how a project can be used. Additional 
 work well in this space. You may also link to more resources.
 
 _For more examples, please refer to the [Documentation](https://example.com)_
+
+### Train a new model
+```sh
+$ python3 DNA_Probe.py train -input data/pig_probe_effiency_150bp_train.tsv.gz -output models/pig_150bp_model.h5
+```
+
+```
+python DNA_Probe.py train -input data/human_probe_effiency_120bp_with_struc_train.tsv.gz -use_struct -output models/human_120bp_struct.h5 -lr 2e-5
+```
+
+```
+python DNA_Probe.py train -input data/human_probe_effiency_120bp_with_struc_train.tsv.gz -use_struct -output models/human_120bp_struct.h5 -lr 2e-5 -gpu 0
+```
+
+Supportted Parameters:
+* input  
+  The input file path
+* output
+* gpu
+* kmer
+* onehot
+* use_struct
+* embed_dim
+* epochs
+* batch_size
+* lr
+
+### Predict data
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

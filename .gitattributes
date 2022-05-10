@@ -1,2 +1,0 @@
-*.tsv.gz filter=lfs diff=lfs merge=lfs -text
-models/human_120bp_struct.h5 filter=lfs diff=lfs merge=lfs -text
