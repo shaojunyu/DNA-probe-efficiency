@@ -180,6 +180,26 @@ Here are some simple and useful examples of how to use this tools. For more opti
     Set the batch size [default: 128] for prediction.
 
 ### - Data Format
+Example datasets are in data folder. Checking out these datasets helps to prepare your onw datasets.
+  - Input data for training:
+    - Header-less tsv(tab-separated value) file
+    - At least 2 or 3 columns
+    - The 1st column is the DNA seq, all the seqs should in the same length
+    - The 2nd column is the efficiency value. If you want to use structure information in the model, the 2nd colunmn is the structure seq in the format of [`Dot-Bracket Notation`](https://www.tbi.univie.ac.at/RNA/ViennaRNA/doc/html/rna_structure_notations.html) and the 3rd column is the efficiency value.  
+    - Example data:
+      ```
+      AGCTTAACGAAGGGCCAGGAGAAGGTTTCTCTGTAGCCTCAGTCTGCCGGACGAACACATCCTTAGGCGACTTGGGACCGTTTCTTTTATCTTATCAAAGTCTACTACACATCGAAGAAT	26.779413773688
+      AGGGGTAGGACCAGAGGGCGGAGGAAGAGTATGGACAGACTCCTACTTCGACCAGCTTCACCACGACGGTAGCCTAGAAAAGTTGGACGAGGAGGCCCAACACCACGGAGCCCGGTGGAC	16.6173844090768
+      ```
+    - Example data with structure
+      ```
+      AGCAGGTTTCGAGACAGGTGAAACTGACGAGTGTAATGTCATCAAGAAAACAAGAAACCTGGTACACAGAAATAAATACGGACCGGTAAGGGGTAGTTCAGTAATCTATTTAAGGAACGA	(.((((((((((((((......(((....)))....)))).))..........)))))))).)..................(((.......))).((((..(((.....)))..))))..	17.7492339387625
+      CCGTGTAAGAACCCGAGTATTACCAGTCTATCACCTCCCCGAATGTATCCCGGTGTATAGACAGTTTCCGGTACCGATACTCGTCGTGGTAGAGGTGTGGTGGTTGCTGCACCTACTTCT	..(((((..((((........((((......(((((((((((..((((((((((((....)))....))))....)))))...))).))..))))))))))))))..)))))........	57.5186324677292
+      ```
+  - Input data for predicting:
+    - Same as the input data for training without the efficiency value, just the DNA seq and optional structure seq.
+    - 1 or 2 columns.
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
