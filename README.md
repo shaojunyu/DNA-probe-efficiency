@@ -54,7 +54,7 @@
 ## About The Project
 
 [//]: # ([![Product Name Screen Shot][product-screenshot]]&#40;https://example.com&#41;)
-A deep learning tool to build models for predicting
+A deep learning tool to build models for predicting the 
 On-target efficiency of DNA probes based on their sequence. We provide some sample data and pre-trained models for testing and evaluation. Use this tool with your dataset to train customized models or just predict new datasets with pre-trained models. It can also be easily modified and applied to other sequence regression problems.
 
 
@@ -79,7 +79,7 @@ Install the dependencies:
 (probe) $ conda install pytorch -c pytorch
 ```
 
->If you want to use GPU to accelarate this tool, please make sure you have installed the proper GPU CUDA driver. Follow the [instructions](https://pytorch.org/get-started/locally/) from PyTorch.
+>If you want to use GPU to accelerate this tool, please make sure you have installed the proper GPU CUDA driver. Follow the [instructions](https://pytorch.org/get-started/locally/) from PyTorch.
 
 ### Installation
 
@@ -97,7 +97,7 @@ Install the dependencies:
 
 ## Usage
 
-Here are some simple and useful examples of how to use this tools. For more options, please refer to the supported arguments. The main program contains two subcommands: `train` and `predict`. In the Train mode, you can train new models with the new dataset, and in the Predict mode, you can predict the efficiency of pre-trained models.
+Here are some simple and useful examples of how to use this tool. For more options, please refer to the supported arguments. The main program contains two subcommands: `train` and `predict`. In the Train mode, you can train new models with the new dataset, and in the Predict mode, you can predict the efficiency of pre-trained models.
 
 ### - Train
   1. Train a new model with the input data and save the model to output. The model will only use the sequence features.
@@ -107,7 +107,7 @@ Here are some simple and useful examples of how to use this tools. For more opti
       -output models/pig_150bp_model.h5
       ```
 
-  2. Train a new model that include the strtture information and set the learning rate as 2e-5. The model will use sequence features as well as the corresponding strucuture information of the sequence.
+  2. Train a new model that includes the structure information and set the learning rate as 2e-5. The model will use sequence features as well as the corresponding structure information of the sequence.
       ```
       python DNA_Probe.py train \  
       -input data/human_probe_effiency_120bp_with_struc_train.tsv.gz \ 
@@ -126,27 +126,27 @@ Here are some simple and useful examples of how to use this tools. For more opti
       -gpu 0
       ```
 
-  ***Supportted arguments of train:***
+  ***Supported arguments of train:***
   * ***input : str, required***  
     The file path of the input data.
   * ***output : str, required***   
     The file path of the output model.
   * ***gpu : int, optional***   
-    The GPU device ID that used to accelerate the process. Leave it empty to use CPU if GPU is not avaliable. Default: None.
+    The GPU device ID that used to accelerate the process. Leave it empty to use CPU if GPU is not available. Default: None.
   * ***kmer : int, optional***    
-    The kmer leagth of DNA seq. The defult value is 1, which is the onehot encoding of DNA. Any value larger than 1 will encode the DNA sequnce based on the kmer first. Please note that if you set the `use_struct` option Ture, this option will have not effect.
+    The kmer length of DNA seq. The default value is 1, which is the one-hot encoding of DNA. Any value larger than 1 will encode the DNA sequence based on the kmer first. Please note that the kmer encoding is not working if you set the `use_struct` option Ture.
   * ***onehot : bool, optional***  
-    If [default: True], use onehot encodding for DNA seq and structure seq. If None, will leave only if position is 0. Please note that this argument will overide the setting in `kmer`.
+    If [default: True], use one-hot encoding for DNA sequences and structure sequences. Please note that this argument will overide the setting in `kmer`.
   * ***use_struct : : bool, optional***  
-    If true, encorapte the structure information in the model and only onehot encoding is available. Default: False.
+    If true, incorporate the structure information in the model and only one-hot encoding is available. Default: False.
   * ***embed_dim : int, optional***  
-    Set the embeding dimention [default: 32] for input sequences.
+    Set the embedding dimension [default: 32] for input sequences.
   * ***epochs : int, optional***  
-    Set the epoches [default: 60] for model training. De
+    Set the epochs [default: 60] for model training.
   * ***batch_size: int, optional***  
     Set the batch size [default: 64] for model training.
   * ***lr : float, optional***  
-    Set the learning rate [defalt: 1e-4] for model traning.   
+    Set the learning rate [defalt: 1e-4] for model training.   
 
   
 </br>  
@@ -159,7 +159,7 @@ Here are some simple and useful examples of how to use this tools. For more opti
       -model models/human_120bp_struct.h5_bk \  
       -output prediction.txt
       ```
-  2. Use GPU to accelarate the prediction.
+  2. Use GPU to accelerate the prediction.
       ```
       python DNA_Probe.py predict \  
       -input data/human_probe_effiency_120bp_with_struc_test.tsv.gz \  
@@ -167,7 +167,7 @@ Here are some simple and useful examples of how to use this tools. For more opti
       -output prediction.txt
       -gpu 0
       ```
-  ***Supportted arguments of predict:***
+  ***Supported arguments of predict:***
   * ***input : str, required***  
     The file path of the input data.
   * ***output : str, required***  
@@ -175,17 +175,17 @@ Here are some simple and useful examples of how to use this tools. For more opti
   * ***model : str, required***  
     The file path of the pre-trained model.
   * ***gpu : int, optional***  
-    The GPU device ID that used to accelerate the process. Leave it empty to use CPU if GPU is not avaliable. Default: None.
+    The GPU device ID that used to accelerate the process. Leave it empty to use CPU if GPU is not available. Default: None.
   * ***batch_size : int, optional***  
     Set the batch size [default: 128] for prediction.
 
 ### - Data Format
-Example datasets are in data folder. Checking out these datasets helps to prepare your onw datasets.
+Example datasets are in the `data` folder. Checking out these datasets helps to prepare your own datasets.
   - Input data for training:
-    - Header-less tsv(tab-separated value) file
+    - Header-less TSV (tab-separated value) file
     - At least 2 or 3 columns
-    - The 1st column is the DNA seq, all the seqs should in the same length
-    - The 2nd column is the efficiency value. If you want to use structure information in the model, the 2nd colunmn is the structure seq in the format of [`Dot-Bracket Notation`](https://www.tbi.univie.ac.at/RNA/ViennaRNA/doc/html/rna_structure_notations.html) and the 3rd column is the efficiency value.  
+    - The 1st column is the DNA sequence. All the sequences should be the same length
+    - The 2nd column is the efficiency value. If you want to use structure information in the model, the 2nd column is the structure seq in the [`Dot-Bracket Notation`](https://www.tbi.univie.ac.at/RNA/ViennaRNA/doc/html/rna_structure_notations.html) format and the 3rd column is the efficiency value
     - Example data:
       ```
       AGCTTAACGAAGGGCCAGGAGAAGGTTTCTCTGTAGCCTCAGTCTGCCGGACGAACACATCCTTAGGCGACTTGGGACCGTTTCTTTTATCTTATCAAAGTCTACTACACATCGAAGAAT	26.779413773688
