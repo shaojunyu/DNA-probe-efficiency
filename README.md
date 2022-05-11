@@ -136,13 +136,13 @@ Here are some simple and useful examples of how to use this tool. For more optio
     The kmer length of DNA seq. The default value is 1, which is the one-hot encoding of DNA. Any value larger than 1 will encode the DNA sequence based on the kmer first. Please note that the kmer encoding is not working if you set the `use_struct` option Ture.
   * ***onehot : bool, optional***  
     If [default: True], use one-hot encoding for DNA sequences and structure sequences. Please note that this argument will overide the setting in `kmer`.
-  * ***use_struct : : bool, optional***  
+  * ***use_struct : bool, optional***  
     If true, incorporate the structure information in the model and only one-hot encoding is available. Default: False.
   * ***embed_dim : int, optional***  
     Set the embedding dimension [default: 32] for input sequences.
   * ***epochs : int, optional***  
     Set the epochs [default: 60] for model training.
-  * ***batch_size: int, optional***  
+  * ***batch_size : int, optional***  
     Set the batch size [default: 64] for model training.
   * ***lr : float, optional***  
     Set the learning rate [defalt: 1e-4] for model training.   
